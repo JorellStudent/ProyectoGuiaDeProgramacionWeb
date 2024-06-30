@@ -19,17 +19,17 @@ Antes de comenzar, asegúrate de tener instalados:
 
 ## Configuración del Proyecto Backend (Node.js, Express, MySQL)
 
-**Crear el proyecto backend: **
+**Crear el proyecto backend:**
 ```bash
 mkdir task-manager
 cd task-manager
 npm init -y
 ```
-**Instalar dependencias necesarias: **
+**Instalar dependencias necesarias:**
 ```bash
 npm install express mysql2 body-parser cors
 ```
-**Estructura de carpetas: **
+**Estructura de carpetas:**
 ```bash
 mkdir server
 cd server
