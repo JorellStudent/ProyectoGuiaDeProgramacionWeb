@@ -1,58 +1,43 @@
-Proyecto Guía de Programación Web - Gestión de Tareas
+#Proyecto Guía de Programación Web - Gestión de Tareas
 Este proyecto es una aplicación de gestión de tareas que utiliza Vue.js para el frontend y Node.js con Express y MySQL para el backend.
 
-Índice
+## Índice
 
 - [Requisitos Previos](#requisitos-previos)
 - [Configuración del Proyecto Backend (Node.js, Express, MySQL)](#configuración-del-proyecto-backend-nodejs-express-mysql)
-  - [Crear el proyecto backend](#crear-el-proyecto-backend)
-  - [Instalar dependencias necesarias](#instalar-dependencias-necesarias)
-  - [Estructura de carpetas](#estructura-de-carpetas)
-  - [Configurar la conexión a la base de datos](#configurar-la-conexión-a-la-base-de-datos)
-  - [Crear el servidor Express](#crear-el-servidor-express)
-  - [Definir las rutas y controladores](#definir-las-rutas-y-controladores)
-  - [Crear la base de datos y la tabla](#crear-la-base-de-datos-y-la-tabla)
+- [Crear la base de datos y la tabla](#crear-la-base-de-datos-y-la-tabla)
 - [Configuración del Proyecto Frontend (Vue.js)](#configuración-del-proyecto-frontend-vuejs)
-  - [Crear el proyecto Vue.js](#crear-el-proyecto-vuejs)
-  - [Instalar Axios para las peticiones HTTP](#instalar-axios-para-las-peticiones-http)
-  - [Configurar Axios](#configurar-axios)
-  - [Crear componentes Vue para la gestión de tareas](#crear-componentes-vue-para-la-gestión-de-tareas)
-  - [Integrar los componentes en la aplicación principal](#integrar-los-componentes-en-la-aplicación-principal)
 - [Ejecución de la Aplicación](#ejecución-de-la-aplicación)
 - [Compilar el Proyecto Vue.js e Integrarlo en Node.js](#compilar-el-proyecto-vuejs-e-integrarlo-en-nodejs)
 
-Requisitos Previos
+## Requisitos Previos
 Antes de comenzar, asegúrate de tener instalados:
 
-Node.js
-MySQL
-Conocimientos básicos de JavaScript, Vue.js, Node.js, Express y MySQL
+1. **Node.js**
+2. **MySQL**
+3. **Conocimientos básicos de JavaScript, Vue.js, Node.js, Express y MySQL**
 
-Configuración del Proyecto Backend (Node.js, Express, MySQL)
+## Configuración del Proyecto Backend (Node.js, Express, MySQL)
 
-Crear el proyecto backend
-bash
-Copiar código
+**Crear el proyecto backend**
+```bash
 mkdir task-manager
 cd task-manager
 npm init -y
-
-Instalar dependencias necesarias
-bash
-Copiar código
+```
+**Instalar dependencias necesarias**
+```bash
 npm install express mysql2 body-parser cors
-
-Estructura de carpetas
-bash
-Copiar código
+```
+**Estructura de carpetas**
+```bash
 mkdir server
 cd server
 mkdir routes models controllers
-
-Configurar la conexión a la base de datos
-javascript
-Copiar código
-// server/db.js
+```
+**Configurar la conexión a la base de datos**
+Crear un archivo "db.js" en la carpeta server: 
+```bash
 const mysql = require('mysql2');
 
 const connection = mysql.createConnection({
@@ -71,11 +56,10 @@ connection.connect((err) => {
 });
 
 module.exports = connection;
-
-Crear el servidor Express
-javascript
-Copiar código
-// server/index.js
+```
+**Crear el servidor Express**
+Crear un archivo "index.js" en la carpeta server:
+```bash
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
@@ -91,11 +75,10 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
-
-Definir las rutas y controladores
-javascript
-Copiar código
-// server/routes/tasks.js
+```
+**Definir las rutas y controladores**
+Crear un archivo "tasks.js" en la carpeta routes:
+```bash
 const express = require('express');
 const router = express.Router();
 const taskController = require('../controllers/taskController');
@@ -106,10 +89,10 @@ router.put('/:id', taskController.updateTask);
 router.delete('/:id', taskController.deleteTask);
 
 module.exports = router;
-
-javascript
-Copiar código
-// server/controllers/taskController.js
+```
+**Crear controllador**
+Crea un archivo taskController.js en la carpeta controllers:
+```bash
 const db = require('../db');
 
 exports.getAllTasks = (req, res) => {
@@ -151,13 +134,10 @@ exports.deleteTask = (req, res) => {
         res.status(204).send();
     });
 };
-
-Crear la base de datos y la tabla
-sql
-Copiar código
--- Crear la base de datos y la tabla
-mysql -u root -p
-
+```
+## Crear la base de datos y la tabla
+Script de la Base de Datos:
+```bash
 CREATE DATABASE task_manager;
 USE task_manager;
 
@@ -166,7 +146,7 @@ CREATE TABLE tasks (
     title VARCHAR(255) NOT NULL,
     description TEXT
 );
-
+```
 Configuración del Proyecto Frontend (Vue.js)
 
 Crear el proyecto Vue.js
