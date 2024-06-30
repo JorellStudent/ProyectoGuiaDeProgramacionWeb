@@ -147,23 +147,20 @@ CREATE TABLE tasks (
     description TEXT
 );
 ```
-Configuración del Proyecto Frontend (Vue.js)
+## Configuración del Proyecto Frontend (Vue.js)
 
 Crear el proyecto Vue.js
-bash
-Copiar código
+```bash
 cd ..
 npx @vue/cli create client
-
-Instalar Axios para las peticiones HTTP
-bash
-Copiar código
+```
+**Instalar Axios para las peticiones HTTP**
+```bash
 npm install axios
-
-Configurar Axios
-javascript
-Copiar código
-// client/src/services/api.js
+```
+**Configurar Axios**
+Crea un archivo src/services/api.js:
+```bash
 import axios from 'axios';
 
 const api = axios.create({
@@ -171,11 +168,10 @@ const api = axios.create({
 });
 
 export default api;
-
-Crear componentes Vue para la gestión de tareas
-vue
-Copiar código
-<!-- client/src/components/TaskList.vue -->
+```
+**Crear componentes Vue para la gestión de tareas**
+Crear src/components/TaskList.vue: 
+```bash
 <template>
     <div>
         <h1>Task List</h1>
@@ -212,10 +208,9 @@ export default {
     }
 };
 </script>
-
-vue
-Copiar código
-<!-- client/src/components/AddTask.vue -->
+```
+Crear src/components/AddTask.vue:
+```bash
 <template>
     <div>
         <h1>Add Task</h1>
@@ -250,11 +245,10 @@ export default {
     }
 };
 </script>
-
-Integrar los componentes en la aplicación principal
-vue
-Copiar código
-<!-- client/src/App.vue -->
+```
+**Integrar los componentes en la aplicación principal**
+En src/App.vue:
+```bash
 <template>
     <div id="app">
         <AddTask @taskAdded="fetchTasks"/>
@@ -279,55 +273,39 @@ export default {
     }
 };
 </script>
-
-Ejecución de la Aplicación
-
-Iniciar el servidor backend
-bash
-Copiar código
+```
+##Ejecución de la Aplicación
+**Iniciar el servidor backend**
+```bash
 cd server
 node index.js
-
-Iniciar la aplicación Vue.js
-bash
-Copiar código
+```
+**Iniciar la aplicación Vue.js**
+```bash
 cd ../client
 npm run serve
-
-Verificar la aplicación
+```
+**Verificar la aplicación**
 
 Abre tu navegador y navega a http://localhost:8080. Deberías ver la aplicación de gestión de tareas funcionando, donde puedes añadir, ver y eliminar tareas.
 
-Compilar el Proyecto Vue.js e Integrarlo en Node.js
+## Compilar el Proyecto Vue.js e Integrarlo en Node.js
 
 Después de desarrollar la aplicación en Vue.js, compílala y luego integra los archivos compilados en el proyecto Node.js con Express:
 
-Compilar el proyecto Vue.js
-bash
-Copiar código
+**Configurar la salida del build:** 
+En tu proyecto Vue.js, abre el archivo vue.config.js (créalo si no existe): 
+```bash
+module.exports = { 
+outputDir: '../server/public', 
+devServer: { 
+proxy: 'http://localhost:3000' 
+} 
+};
+```
+**Compilar el proyecto Vue.js**
+Esto generará los archivos compilados de la aplicación Vue.js en la carpeta server/public.
+```bash
 cd client
 npm run build
-
-Mover los archivos compilados al proyecto Node.js
-bash
-Copiar código
-cp -r dist/* ../server/public/
-
-Configurar el servidor Express para servir los archivos compilados
-javascript
-Copiar código
-// server/index.js
-const express = require('express');
-const path = require('path');
-
-const app = express();
-app.use(express.static('public'));
-
-app.get('*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, 'public', 'index.html'));
-});
-
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
-});
+```
