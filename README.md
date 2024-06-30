@@ -1,4 +1,5 @@
-#Proyecto Guía de Programación Web - Gestión de Tareas
+##Proyecto Guía de Programación Web - Gestión de Tareas
+
 Este proyecto es una aplicación de gestión de tareas que utiliza Vue.js para el frontend y Node.js con Express y MySQL para el backend.
 
 ## Índice
