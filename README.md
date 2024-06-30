@@ -367,22 +367,40 @@ sirviendo desde tu servidor Express.
 
 La estructura final de tu proyecto debería verse algo así:
 
-task-manager/ 
+task-manager/
+
 ├── client/ 
-│   ├── dist/   
+
+│   ├── dist/  
+
 │   ├── public/ 
+
 │   ├── src/ 
+
 │   ├── vue.config.js 
+
 │   └── ... 
+
 ├── server/ 
+
 │   ├── controllers/ 
+
 │   │   └── taskController.js 
+
 │   ├── models/ 
+
 │   ├── routes/ 
+
 │   │   └── tasks.js 
+
 │   ├── public/   
+
 │   │   └── index.html 
+
 │   ├── db.js 
+
 │   ├── index.js 
+
 │   └── ... 
+
 └── package.json
