@@ -9,7 +9,8 @@ Este proyecto es una aplicación de gestión de tareas que utiliza Vue.js para e
 - [Configuración del Proyecto Frontend (Vue.js)](#configuración-del-proyecto-frontend-vuejs)
 - [Ejecución de la Aplicación](#ejecución-de-la-aplicación)
 - [Compilar el Proyecto Vue.js e Integrarlo en Node.js](#compilar-el-proyecto-vuejs-e-integrarlo-en-nodejs)
-
+- [Configurar Express para Servir la Aplicación Vue.js](#configurar-express-para-servir-la-aplicación-vue.js)
+- [Estructura Final del Proyecto](#estructura-final-del-proyecto)
 ## Requisitos Previos
 
 Antes de comenzar, asegúrate de tener instalados:
@@ -301,7 +302,7 @@ npm run serve
 **Verificar la aplicación**
 
 Abre tu navegador y navega a http://localhost:8080. Deberías ver la aplicación de gestión de tareas funcionando, donde puedes añadir, ver y eliminar tareas.
-
+Despues compilar en proyecto de vue para agregar en la carpeta de node (views).
 ## Compilar el Proyecto Vue.js e Integrarlo en Node.js
 
 Después de desarrollar la aplicación en Vue.js, compílala y luego integra los archivos compilados en el proyecto Node.js con Express:
@@ -324,3 +325,64 @@ Esto generará los archivos compilados de la aplicación Vue.js en la carpeta se
 cd client
 npm run build
 ```
+
+## Configurar Express para Servir la Aplicación Vue.js
+
+**Modificar el servidor Express para servir archivos estáticos**
+
+Abre index.js en la carpeta server y añade el middleware para servir archivos estáticos:
+```bash
+const bodyParser = require('body-parser'); 
+const cors = require('cors'); 
+const path = require('path'); 
+const taskRoutes = require('./routes/tasks'); 
+const app = express(); 
+app.use(cors()); 
+app.use(bodyParser.json()); 
+// Configurar la carpeta pública para servir archivos estáticos 
+app.use(express.static(path.join(__dirname, 'public'))); 
+app.use('/api/tasks', taskRoutes); 
+// Configurar el enrutamiento de Vue.js 
+app.get('*', (req, res) => { 
+res.sendFile(path.join(__dirname, 'public', 'index.html')); 
+}); 
+const PORT = process.env.PORT || 3000; 
+app.listen(PORT, () => { 
+console.log(`Server is running on port ${PORT}`); 
+});
+```
+**Verificar la Integración**
+
+Iniciar el servidor backend:
+```bash
+cd server 
+node index.js
+```
+**Acceder a la aplicación:**
+
+Abre tu navegador y navega a http://localhost:3000. Deberías ver la aplicación Vue.js 
+sirviendo desde tu servidor Express.
+
+## Estructura Final del Proyecto
+
+La estructura final de tu proyecto debería verse algo así:
+
+task-manager/ 
+├── client/ 
+│   ├── dist/   
+│   ├── public/ 
+│   ├── src/ 
+│   ├── vue.config.js 
+│   └── ... 
+├── server/ 
+│   ├── controllers/ 
+│   │   └── taskController.js 
+│   ├── models/ 
+│   ├── routes/ 
+│   │   └── tasks.js 
+│   ├── public/   
+│   │   └── index.html 
+│   ├── db.js 
+│   ├── index.js 
+│   └── ... 
+└── package.json
