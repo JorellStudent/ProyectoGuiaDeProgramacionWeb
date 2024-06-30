@@ -11,6 +11,7 @@ Este proyecto es una aplicación de gestión de tareas que utiliza Vue.js para e
 - [Compilar el Proyecto Vue.js e Integrarlo en Node.js](#compilar-el-proyecto-vuejs-e-integrarlo-en-nodejs)
 
 ## Requisitos Previos
+
 Antes de comenzar, asegúrate de tener instalados:
 
 1. **Node.js**
@@ -19,13 +20,13 @@ Antes de comenzar, asegúrate de tener instalados:
 
 ## Configuración del Proyecto Backend (Node.js, Express, MySQL)
 
-**Crear el proyecto backend:**
+**Crear el proyecto backend**
 ```bash
 mkdir task-manager
 cd task-manager
 npm init -y
 ```
-**Instalar dependencias necesarias:**
+**Instalar dependencias necesarias**
 ```bash
 npm install express mysql2 body-parser cors
 ```
@@ -59,6 +60,7 @@ connection.connect((err) => {
 module.exports = connection;
 ```
 **Crear el servidor Express**
+
 Crear un archivo "index.js" en la carpeta server:
 ```bash
 const express = require('express');
@@ -78,6 +80,7 @@ app.listen(PORT, () => {
 });
 ```
 **Definir las rutas y controladores**
+
 Crear un archivo "tasks.js" en la carpeta routes:
 ```bash
 const express = require('express');
@@ -92,6 +95,7 @@ router.delete('/:id', taskController.deleteTask);
 module.exports = router;
 ```
 **Crear controllador**
+
 Crea un archivo taskController.js en la carpeta controllers:
 ```bash
 const db = require('../db');
@@ -137,6 +141,7 @@ exports.deleteTask = (req, res) => {
 };
 ```
 ## Crear la base de datos y la tabla
+
 Script de la Base de Datos:
 ```bash
 CREATE DATABASE task_manager;
@@ -160,6 +165,7 @@ npx @vue/cli create client
 npm install axios
 ```
 **Configurar Axios**
+
 Crea un archivo src/services/api.js:
 ```bash
 import axios from 'axios';
@@ -171,6 +177,7 @@ const api = axios.create({
 export default api;
 ```
 **Crear componentes Vue para la gestión de tareas**
+
 Crear src/components/TaskList.vue: 
 ```bash
 <template>
@@ -210,6 +217,7 @@ export default {
 };
 </script>
 ```
+
 Crear src/components/AddTask.vue:
 ```bash
 <template>
@@ -247,7 +255,9 @@ export default {
 };
 </script>
 ```
+
 **Integrar los componentes en la aplicación principal**
+
 En src/App.vue:
 ```bash
 <template>
@@ -275,7 +285,9 @@ export default {
 };
 </script>
 ```
+
 ## Ejecución de la Aplicación
+
 **Iniciar el servidor backend**
 ```bash
 cd server
@@ -295,6 +307,7 @@ Abre tu navegador y navega a http://localhost:8080. Deberías ver la aplicación
 Después de desarrollar la aplicación en Vue.js, compílala y luego integra los archivos compilados en el proyecto Node.js con Express:
 
 **Configurar la salida del build:** 
+
 En tu proyecto Vue.js, abre el archivo vue.config.js (créalo si no existe): 
 ```bash
 module.exports = { 
@@ -305,6 +318,7 @@ proxy: 'http://localhost:3000'
 };
 ```
 **Compilar el proyecto Vue.js**
+
 Esto generará los archivos compilados de la aplicación Vue.js en la carpeta server/public.
 ```bash
 cd client
