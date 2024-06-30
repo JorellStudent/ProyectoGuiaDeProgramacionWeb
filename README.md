@@ -36,6 +36,7 @@ cd server
 mkdir routes models controllers
 ```
 **Configurar la conexión a la base de datos**
+
 Crear un archivo "db.js" en la carpeta server: 
 ```bash
 const mysql = require('mysql2');
